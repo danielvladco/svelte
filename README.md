@@ -10,8 +10,8 @@ If you're seeing this, you've probably already done this step. Congrats!
 # create a new project in the current directory
 npm init svelte
 
-# create a new project in my-app
-npm init svelte my-app
+# create a new project in frontend
+npm init svelte frontend
 ```
 
 ## Developing
@@ -36,3 +36,42 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+# Student is a project for creating tests and quizes for students
+
+Libs to review:
+- github.com/markbates/goth -> https://www.loginradius.com/blog/engineering/google-authentication-with-golang-and-goth/
+
+To create a quick MVP Steps:
+- Create your database schema on: https://dbdiagram.io
+- Migrate using ` ` ...
+- Generate models with sql boiler
+- Generate graphql schema
+- Add data validations (possible to do it in graphql schema)
+- Do some pluming
+- Add logic validations and business logic
+- (frontend steps are a bit unclear at this point)
+
+**Should create a template for specific stacks like: [svelte-graphql-go] or [react-swagger-go] in the format [<frontend>-<protocol>-<backend>-<db>[<frameworks>...]]
+
+
+Authentication:
+
+```go
+session, err := store.Get(r, "session-name")
+if err != nil {
+http.Error(w, err.Error(), 500)
+return
+}
+
+session.Options.Path = "/"
+session.Values["user"] = user
+
+err := session.Save(r, w)
+if err != nil {
+http.Error(w, err.Error(), 500)
+return
+}
+
+http.Redirect(w, r, "/", 301)
+```
